@@ -33,6 +33,13 @@ export function Login({ lang, onLangChange, requestCode, verifyCode }: Props) {
     }
   }
 
+  const inputBase =
+    'mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-accent focus:ring-2 focus:ring-accent/20'
+  const labelBase =
+    'mt-6 block text-xs font-semibold uppercase tracking-wider text-slate-500'
+  const submitBase =
+    'mt-6 w-full rounded-lg bg-accent px-4 py-3 font-semibold text-white transition hover:bg-accent-hover'
+
   return (
     <div className="flex min-h-dvh items-center justify-center px-5 py-10">
       <div className="w-full max-w-md fade-in">
@@ -41,65 +48,62 @@ export function Login({ lang, onLangChange, requestCode, verifyCode }: Props) {
           <LangToggle lang={lang} onChange={onLangChange} />
         </div>
 
-        <div className="card-elev rounded-2xl border hairline bg-navy-700/70 p-7 backdrop-blur">
+        <div className="card rounded-2xl border border-slate-200 bg-white p-7">
           {phase === 'email' ? (
             <form onSubmit={submitEmail} noValidate>
-              <h1 className="font-serif text-3xl font-semibold tracking-tight">
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900">
                 {t('loginTitle', lang)}
               </h1>
-              <p className="mt-1.5 text-sm text-cream-dim">
+              <p className="mt-1.5 text-sm text-slate-500">
                 {t('loginSubtitle', lang)}
               </p>
 
-              <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-bronze-300">
+              <label htmlFor="login-email" className={labelBase}>
                 {t('emailLabel', lang)}
               </label>
               <input
+                id="login-email"
                 type="email"
                 autoFocus
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t('emailPlaceholder', lang)}
-                className="mt-2 w-full rounded-xl border hairline bg-navy-600/80 px-4 py-3 text-cream outline-none transition focus:border-bronze focus:ring-1 focus:ring-bronze/50"
+                className={inputBase}
               />
 
-              {error && <p className="mt-2 text-sm text-bronze-300">{error}</p>}
+              {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
-              <button
-                type="submit"
-                className="gold-glow mt-6 w-full rounded-xl bg-bronze px-4 py-3 font-semibold text-navy transition hover:bg-bronze-400"
-              >
+              <button type="submit" className={submitBase}>
                 {t('continue', lang)}
               </button>
             </form>
           ) : (
             <form onSubmit={submitCode} noValidate>
-              <h1 className="font-serif text-3xl font-semibold tracking-tight">
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900">
                 {t('twoFaTitle', lang)}
               </h1>
-              <p className="mt-1.5 text-sm text-cream-dim">
-                {t('twoFaSubtitle', lang)} · <span className="text-cream">{email}</span>
+              <p className="mt-1.5 text-sm text-slate-500">
+                {t('twoFaSubtitle', lang)} ·{' '}
+                <span className="font-medium text-slate-700">{email}</span>
               </p>
 
-              <label className="mt-6 block text-xs font-semibold uppercase tracking-wider text-bronze-300">
+              <label htmlFor="login-code" className={labelBase}>
                 {t('codeLabel', lang)}
               </label>
               <input
+                id="login-code"
                 inputMode="numeric"
                 autoFocus
                 maxLength={6}
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                 placeholder="••••••"
-                className="mt-2 w-full rounded-xl border hairline bg-navy-600/80 px-4 py-3 text-center text-2xl tracking-[0.5em] text-cream outline-none transition focus:border-bronze focus:ring-1 focus:ring-bronze/50"
+                className={`${inputBase} text-center text-2xl tracking-[0.5em]`}
               />
 
-              {error && <p className="mt-2 text-sm text-bronze-300">{error}</p>}
+              {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
-              <button
-                type="submit"
-                className="gold-glow mt-6 w-full rounded-xl bg-bronze px-4 py-3 font-semibold text-navy transition hover:bg-bronze-400"
-              >
+              <button type="submit" className={submitBase}>
                 {t('enter', lang)}
               </button>
 
@@ -111,14 +115,14 @@ export function Login({ lang, onLangChange, requestCode, verifyCode }: Props) {
                     setError(null)
                     setCode('')
                   }}
-                  className="text-cream-dim transition hover:text-cream"
+                  className="font-medium text-slate-500 transition hover:text-slate-900"
                 >
                   ← {t('back', lang)}
                 </button>
                 <button
                   type="button"
                   onClick={() => setError(null)}
-                  className="text-bronze-300 transition hover:text-bronze"
+                  className="font-medium text-accent transition hover:text-accent-hover"
                 >
                   {t('resend', lang)}
                 </button>
@@ -127,7 +131,7 @@ export function Login({ lang, onLangChange, requestCode, verifyCode }: Props) {
           )}
         </div>
 
-        <p className="mt-4 text-center text-xs text-cream-dim/70">
+        <p className="mt-4 text-center text-xs text-slate-400">
           {t('demoHint', lang)}
         </p>
       </div>
@@ -138,14 +142,14 @@ export function Login({ lang, onLangChange, requestCode, verifyCode }: Props) {
 function Wordmark({ lang }: { lang: Lang }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="flex h-9 w-9 items-center justify-center rounded-lg border hairline bg-navy-600 font-serif text-xl font-bold gold-text">
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-xl font-bold text-white">
         C
       </span>
       <div className="leading-tight">
-        <div className="font-serif text-lg font-semibold">{t('appName', lang)}</div>
-        <div className="text-[11px] uppercase tracking-widest text-cream-dim">
-          {t('appTagline', lang)}
+        <div className="text-lg font-bold text-slate-900">
+          {t('appName', lang)}
         </div>
+        <div className="text-[11px] text-slate-500">{t('appTagline', lang)}</div>
       </div>
     </div>
   )

@@ -23,34 +23,38 @@ export function SelectScreen({
   columns = 2,
 }: Props) {
   const grid =
-    columns === 3
-      ? 'grid-cols-1 sm:grid-cols-3'
-      : 'grid-cols-1 sm:grid-cols-2'
+    columns === 3 ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'
 
   return (
     <div className="fade-in">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-bronze-300">
+      <p className="text-xs font-semibold uppercase tracking-wider text-accent">
         {stepLabel}
       </p>
-      <h1 className="mt-1.5 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h1 className="mt-1.5 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
         {title}
       </h1>
 
-      <div className={`mt-7 grid gap-3.5 ${grid}`}>
-        {items.map((item) => (
+      <div className={`mt-6 grid gap-3 ${grid}`}>
+        {items.map((item, i) => (
           <button
             key={item.id}
             onClick={() => onSelect(item.id)}
-            className="gold-glow card-elev group flex min-h-[104px] flex-col items-start justify-between rounded-2xl border hairline bg-navy-700/70 p-5 text-left transition hover:bg-navy-600/80"
+            className="card card-hover group flex min-h-[96px] items-start gap-3.5 rounded-xl border border-slate-200 bg-white p-4 text-left transition hover:border-accent sm:p-5"
           >
-            <span className="font-serif text-2xl font-semibold text-cream">
-              {item.label}
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-sm font-bold text-slate-500 transition group-hover:bg-accent-soft group-hover:text-accent">
+              {i + 1}
             </span>
-            <span className="mt-2 flex w-full items-center justify-between text-sm text-cream-dim">
-              <span>{item.hint}</span>
-              <span className="text-bronze opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100">
-                →
+            <span className="flex min-w-0 flex-1 flex-col">
+              <span className="text-lg font-semibold leading-snug text-slate-900">
+                {item.label}
               </span>
+              <span className="mt-1 text-sm text-slate-500">{item.hint}</span>
+            </span>
+            <span
+              aria-hidden
+              className="mt-0.5 shrink-0 text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-accent"
+            >
+              →
             </span>
           </button>
         ))}

@@ -7,15 +7,15 @@ interface Props {
 
 export function LangToggle({ lang, onChange }: Props) {
   return (
-    <div className="inline-flex rounded-full border hairline bg-navy-700/60 p-0.5 text-sm font-medium">
+    <div className="inline-flex rounded-lg border border-slate-200 bg-white p-0.5 text-sm font-medium">
       {(['ru', 'pl'] as const).map((l) => (
         <button
           key={l}
           onClick={() => onChange(l)}
-          className={`rounded-full px-3 py-1 transition-colors ${
+          className={`rounded-md px-2.5 py-1 transition-colors ${
             lang === l
-              ? 'bg-bronze text-navy'
-              : 'text-cream-dim hover:text-cream'
+              ? 'bg-accent text-white'
+              : 'text-slate-500 hover:text-slate-900'
           }`}
           aria-pressed={lang === l}
         >

@@ -71,7 +71,7 @@ export default function App() {
         onHome={reset}
       />
 
-      <main className="mx-auto max-w-4xl px-4 py-7 sm:px-6 sm:py-10">
+      <main className="mx-auto max-w-3xl px-4 py-7 sm:px-6 sm:py-10">
         <Stepper
           lang={lang}
           active={step}
@@ -134,7 +134,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="mx-auto max-w-4xl px-6 pb-8 pt-2 text-center text-xs text-cream-dim/50">
+      <footer className="mx-auto max-w-3xl px-6 pb-8 pt-2 text-center text-xs text-slate-400">
         Convvy · internal tool
       </footer>
     </div>

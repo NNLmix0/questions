@@ -15,38 +15,46 @@ interface Props {
 
 export function Stepper({ lang, active, crumbs }: Props) {
   return (
-    <nav className="mb-7 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+    <nav
+      aria-label="progress"
+      className="mb-7 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm"
+    >
       {crumbs.map((c, i) => {
         const step = (i + 1) as 1 | 2 | 3
         const isActive = step === active
         const done = step < active
-        const clickable = done && c.onClick
+        const clickable = done && Boolean(c.onClick)
         return (
-          <span key={c.key} className="flex items-center gap-2">
-            {i > 0 && <span className="text-bronze/50">/</span>}
+          <span key={c.key} className="flex items-center gap-1.5">
+            {i > 0 && (
+              <span aria-hidden className="text-slate-300">
+                ›
+              </span>
+            )}
             <button
               disabled={!clickable}
               onClick={c.onClick}
-              className={`flex items-center gap-2 rounded-full px-2.5 py-1 transition ${
+              aria-current={isActive ? 'step' : undefined}
+              className={`flex items-center gap-2 rounded-full px-2 py-1 transition ${
                 isActive
-                  ? 'text-cream'
+                  ? 'text-slate-900'
                   : clickable
-                    ? 'text-cream-dim hover:text-cream'
-                    : 'text-cream-dim/50'
+                    ? 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
+                    : 'cursor-default text-slate-400'
               }`}
             >
               <span
                 className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold ${
                   isActive
-                    ? 'bg-bronze text-navy'
+                    ? 'bg-accent text-white'
                     : done
-                      ? 'border hairline text-bronze-300'
-                      : 'border hairline text-cream-dim/50'
+                      ? 'bg-accent-soft text-accent'
+                      : 'border border-slate-300 text-slate-400'
                 }`}
               >
-                {step}
+                {done ? '✓' : step}
               </span>
-              <span className="whitespace-nowrap">
+              <span className="whitespace-nowrap font-medium">
                 {c.value ?? t(c.key, lang)}
               </span>
             </button>
