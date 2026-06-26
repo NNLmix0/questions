@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ── Палитра люкс: 3 основных цвета ───────────────────── */
+  /* 1 · Тёмно-синий (фон, структура) */
+  --color-navy: #0a1626;
+  --color-navy-700: #0e1d33;
+  --color-navy-600: #14263f;
+  --color-navy-500: #1b3050;
+
+  /* 2 · Бронза (акцент, действия) */
+  --color-bronze: #b08d57;
+  --color-bronze-400: #c7a572;
+  --color-bronze-300: #ddc296;
+
+  /* 3 · Кремовый (текст, свет) */
+  --color-cream: #f3ecdd;
+  --color-cream-dim: #cfc6b4;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-navy);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(176, 141, 87, 0.12), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(27, 48, 80, 0.5), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(176, 141, 87, 0.35);
+    color: var(--color-cream);
+  }
+}
+
+@layer utilities {
+  /* Тонкая золотая линия-разделитель */
+  .hairline {
+    border-color: rgba(176, 141, 87, 0.28);
+  }
+
+  .gold-text {
+    background: linear-gradient(180deg, var(--color-bronze-300), var(--color-bronze));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card-elev {
+    box-shadow:
+      0 1px 0 0 rgba(243, 236, 221, 0.04) inset,
+      0 24px 60px -30px rgba(0, 0, 0, 0.8);
+  }
+
+  .gold-glow:hover {
+    box-shadow: 0 0 0 1px rgba(176, 141, 87, 0.5), 0 18px 40px -20px rgba(176, 141, 87, 0.35);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
